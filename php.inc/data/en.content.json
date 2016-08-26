@@ -1,0 +1,26 @@
+{
+    "language": {
+        "title": "Orenburg - Automatic weather station",
+        "description": "Weather station",
+        "no_data": "No data to display",
+        "last_update": "Last update",
+        "location": {
+            "address": "Orenburg, Chkalov street",
+            "country": "Russian Federation"
+        }
+    },
+    "dashboard": {
+        "temp1": "On the street",
+        "temp2": "In room",
+        "humd": "Air humidity",
+        "press": "Pressure (mm)",
+        "light": "Illuminance (lx)",
+        "wind": "Wind (m\\s)",
+        "sunrise": "Sunrise",
+        "sunset": "Sunset",
+        "dewpoint": "Dew point",
+        "battery": "Voltage (battery)",
+        "moonrise": "Moon rise",
+        "moonset": "Moon sunset"
+    }
+}
