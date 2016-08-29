@@ -16,7 +16,7 @@
  * @subpackage Controllers
  * @category Resume
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.0 (25.08.2016)
+ * @version 1.0.1 (29.08.2016)
  */
 class Insert {
 
@@ -84,7 +84,7 @@ class Insert {
      * @return void
      */
     protected function check_secret() {
-        if ( ! isset($_GET['ID']) || $_GET['ID'] != $this->arduino['secret'])
+        if ( ! isset($_POST['ID']) || $_POST['ID'] != $this->arduino['secret'])
             \Core\Router::redirect('/');
     } // protected function check_secret()
 
@@ -97,13 +97,13 @@ class Insert {
      */
     protected function get_weather_params() {
         $this->params = array(
-            'temp1' => $_GET['temp1'] ? (float) $_GET['temp1'] : 0.0,
-            'temp2' => $_GET['temp2'] ? (float) $_GET['temp2'] : 0.0,
-            'humd'  => $_GET['humd'] ? (float) $_GET['humd'] : 0.0,
-            'press' => $_GET['press'] ? (float) $_GET['press'] : 0.0,
-            'light' => $_GET['light'] ? (int) $_GET['light'] : 0,
-            'wind'  => $_GET['wind'] ? (float) $_GET['wind'] : 0.0,
-            'battery' => $_GET['battery'] ? (float) $_GET['battery'] : 0.0
+            'temp1' => $_POST['temp1'] ? (float) $_POST['temp1'] : 0.0,
+            'temp2' => $_POST['temp2'] ? (float) $_POST['temp2'] : 0.0,
+            'humd'  => $_POST['humd'] ? (float) $_POST['humd'] : 0.0,
+            'press' => $_POST['press'] ? (float) $_POST['press'] : 0.0,
+            'light' => $_POST['light'] ? (int) $_POST['light'] : 0,
+            'wind'  => $_POST['wind'] ? (float) $_POST['wind'] : 0.0,
+            'battery' => $_POST['battery'] ? (float) $_POST['battery'] : 0.0
         );
     } // protected function get_weather_params()
 

@@ -49,9 +49,10 @@ RewriteBase /CATALOG_NAME/
 
 ### Usage
 
-Your weather station on the Arduino to transmit a GET request to the address '/insert', containing a ready-made set of data. Example:
+Your weather station on the Arduino to transmit a POST request to the address '/insert', containing a ready-made set of data. Example:
 
-> http://example.com/insert?ID=SECRET_KEY&temp1=25.6&temp2=21.6&battery=5.9&humd=44.2&press=775.0&light=260&wind=1.73
+> POST http://example.com/insert 
+> ID=SECRET_KEY&temp1=25.6&temp2=21.6&battery=5.9&humd=44.2&press=775.0&light=260&wind=1.73
 
 GET request contains the following parameters:
 - "**temp1**" (*float*) the value of the first temperature sensor
