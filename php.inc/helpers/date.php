@@ -17,19 +17,19 @@ if ( ! function_exists('get_season')) {
         $month  = date('m');
 
         if ($month == 12 || $month == 1 || $month == 2 ) {
-            
+
             return $season[0];
         } else if ($month >= 3 && $month <= 5) {
-            
+
             return $season[1];
         } else if ($month >= 6 && $month <= 8) {
-            
+
             return $season[2];
         } else if ($month >= 9 && $month <= 11) {
-            
+
             return $season[3];
         }
-        
+
         return NULL;
     } // function get_season()
 }

@@ -16,7 +16,7 @@
  * @subpackage Controllers
  * @category Resume
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.1 (29.08.2016)
+ * @version 1.0.2 (01.09.2016)
  */
 class Insert {
 
@@ -97,13 +97,13 @@ class Insert {
      */
     protected function get_weather_params() {
         $this->params = array(
-            'temp1' => $_POST['temp1'] ? (float) $_POST['temp1'] : 0.0,
-            'temp2' => $_POST['temp2'] ? (float) $_POST['temp2'] : 0.0,
-            'humd'  => $_POST['humd'] ? (float) $_POST['humd'] : 0.0,
-            'press' => $_POST['press'] ? (float) $_POST['press'] : 0.0,
-            'light' => $_POST['light'] ? (int) $_POST['light'] : 0,
-            'wind'  => $_POST['wind'] ? (float) $_POST['wind'] : 0.0,
-            'battery' => $_POST['battery'] ? (float) $_POST['battery'] : 0.0
+            'temp1' => $_POST['t1'] ? (float) $_POST['t1'] : 0.0,
+            'temp2' => $_POST['t2'] ? (float) $_POST['t2'] : 0.0,
+            'humd'  => $_POST['h'] ? (float) $_POST['h'] : 0.0,
+            'press' => $_POST['p'] ? (float) $_POST['p'] : 0.0,
+            'light' => $_POST['l'] ? (int) $_POST['l'] : 0,
+            'wind'  => $_POST['w'] ? (float) $_POST['w'] : 0.0,
+            'battery' => $_POST['v'] ? (float) $_POST['v'] : 0.0
         );
     } // protected function get_weather_params()
 

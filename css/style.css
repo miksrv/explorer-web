@@ -303,6 +303,8 @@ section:last-of-type {
     -o-filter: blur(2px);
     -ms-filter: blur(2px);
     filter: blur(2px);
+
+    opacity: .7;
 }
 #main > .wrapper.content > .info {
     position: absolute;
@@ -442,7 +444,7 @@ section:last-of-type {
         width: 50%;
     }   
 }
-@media (max-width: 470px) {
+@media (max-width: 450px) {
     .row .collumn {
         width: 100%;
     }

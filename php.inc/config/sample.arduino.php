@@ -7,6 +7,8 @@
  * @link       http://miksrv.ru
  */
 
+    date_default_timezone_set('America/Los_Angeles');
+
     $config['latitude']   = '34.11';
     $config['longitude']  = '36.23';
     $config['gmt_offset'] = '1';
