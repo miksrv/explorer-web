@@ -13,7 +13,7 @@ if ( ! function_exists('get_season')) {
      * @return string
      */
     function get_season() {
-        $season = array('winter', 'spring', 'summer', 'fall');
+        $season = array('winter', 'spring', 'summer', 'autumn');
         $month  = date('m');
 
         if ($month == 12 || $month == 1 || $month == 2 ) {
