@@ -14,7 +14,7 @@
  * 
  * @package Automated weather station
  * @subpackage Controllers
- * @category Resume
+ * @category Insert
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
  * @version 1.0.2 (01.09.2016)
  */

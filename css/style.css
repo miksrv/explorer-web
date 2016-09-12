@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 html * {
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;tile
     -moz-osx-font-smoothing: grayscale;
 }
 
@@ -70,7 +70,6 @@ h4 {
 .c {
     text-align: center;
 }
-
 
 header {
     background-color: #414141;
@@ -346,58 +345,67 @@ section:last-of-type {
     margin-right: 5px;
     color: #7EC51D;
 }
+.tile a, .tile a:hover {
+    display: inline-block;
+    border: none;
+    color: inherit !important;
+    width: 100%;
+}
+.tile a:hover {
+    background: #4E4E4E;
+}
 .bg-blue {
     border-color: #08B8F4;
 }
-.bg-blue > .column-left > i {
+.bg-blue .collumn-left > i {
     color: #08B8F4;
 }
 .bg-darkblue {
     border-color: #577CEF;
 }
-.bg-darkblue > .column-left > i {
+.bg-darkblue .collumn-left > i {
     color: #577CEF;
 }
 .bg-cobalt {
     border-color: #04CCDB;
 }
-.bg-cobalt > .column-left > i {
+.bg-cobalt .collumn-left > i {
     color: #04CCDB;
 }
 .bg-red {
     border-color: #F2745E;
 }
-.bg-red > .column-left > i {
+.bg-red .collumn-left > i {
     color: #F2745E;
 }
 .bg-yellow {
     border-color: #FFB804;
 }
-.bg-yellow > .column-left > i {
+.bg-yellow .collumn-left > i {
     color: #FFB804;
 }
 .bg-green  {
     border-color: #9FCD60;
 }
-.bg-green > .column-left > i {
+.bg-green .collumn-left > i {
     color: #9FCD60;
 }
 .bg-pink {
     border-color: #F9A4A7
 }
-.bg-pink > .column-left > i {
+.bg-pink .collumn-left > i {
     color: #F9A4A7;
 }
 .bg-purple {
     border-color: #BF6EEB;
 }
-.bg-purple > .column-left > i {
+.bg-purple .collumn-left > i {
     color: #BF6EEB;
 }
 .bg-brown {
     border-color: #9A8A7D;
 }
-.bg-brown > .column-left > i {
+.bg-brown .collumn-left > i {
     color: #9A8A7D;
 }
 
@@ -418,22 +426,22 @@ section:last-of-type {
     float: left;
     width: 25%;
 }
-.column-left {
+.collumn-left {
     float: left;
     width: 35%;
     font-size: 3em;
-    padding: 0;
+    padding: 8px 0 0 5px;
     text-align: left;
 }
-.column-right {
+.collumn-right {
     float: right;
     width: 65%;
     text-align: left;
 }
-.column-right h5 {
+.collumn-right h5 {
     margin: 0.5em 0px;
 }
-.column-right h2 {
+.collumn-right h2 {
     margin: 0;
     line-height: 1em;
     font-size: 2em;

@@ -18,7 +18,7 @@
  * @subpackage Models
  * @category Dashboard
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.0 (25.08.2016)
+ * @version 1.0.1 (07.09.2016)
  */
 class Dashboard extends \Core\BaseModel {
 
@@ -127,16 +127,18 @@ class Dashboard extends \Core\BaseModel {
      * @return array
      */
     function get_average_value($data) {
-        $new = array();
+        $new   = array();
         $count = count($data);
 
-        foreach ($data as $array) {
+        if ($count > 0) {
+            foreach ($data as $array) {
 
-            foreach ($array as $key => $val) {
-                if ( ! isset($new[$key]))
-                    $new[$key] = 0;
+                foreach ($array as $key => $val) {
+                    if ( ! isset($new[$key]))
+                        $new[$key] = 0;
 
-                $new[$key] += $val;
+                    $new[$key] += $val;
+                }
             }
         }
 

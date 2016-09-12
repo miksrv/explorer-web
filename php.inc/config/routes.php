@@ -9,5 +9,6 @@
 
     \Core\Router::instance()->registration('/', 'main.php', 'Main', 'make');
     \Core\Router::instance()->registration('insert', 'main.php', 'Insert', 'write');
+    \Core\Router::instance()->registration('statistics', 'statistics.php', 'Statistics', 'make');
 
 /* Location: /php.inc/config/routes.php */
