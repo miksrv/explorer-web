@@ -1,5 +1,5 @@
                         <div class="tile bg-blue">
-                            <a href="/statistics/?set=humd" title="<?= $language->graphics; ?> - <?= $dashboard->humd; ?>">
+                            <a href="<?= DIR_ROOT ?>statistics/?set=humd" title="<?= $language->graphics; ?> - <?= $dashboard->humd; ?>">
                                 <div class="collumn-left">
                                     <i class="wi wi-humidity"></i>
                                 </div>

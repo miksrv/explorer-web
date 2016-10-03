@@ -1,5 +1,5 @@
                         <div class="tile bg-pink">
-                            <a href="/statistics/?set=wind" title="<?= $language->graphics; ?> - <?= $dashboard->wind; ?>">
+                            <a href="<?= DIR_ROOT ?>statistics/?set=wind" title="<?= $language->graphics; ?> - <?= $dashboard->wind; ?>">
                                 <div class="collumn-left">
                                     <i class="wi wi-strong-wind"></i>
                                 </div>

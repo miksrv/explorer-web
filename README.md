@@ -44,6 +44,10 @@ On this:
 ```Apache
 RewriteBase /CATALOG_NAME/
 ```
+And the option to edit the configuration file '*defines.php*':
+```php
+    define('DIR_ROOT', '/CATALOG_NAME/');
+```
 
 ----------------------
 

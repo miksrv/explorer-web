@@ -20,4 +20,6 @@
     define('DIR_CORECLASS', COREPATH . 'core/');
     define('DIR_CONTENT', COREPATH . 'data/');
 
+    define('DIR_ROOT', '/');
+
 /* Location: /php.inc/config/defines.php */

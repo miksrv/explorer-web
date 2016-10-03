@@ -1,5 +1,5 @@
                         <div class="tile bg-red">
-                            <a href="/statistics/?set=temp1" title="<?= $language->graphics; ?> - <?= $dashboard->temp1; ?>">
+                            <a href="<?= DIR_ROOT ?>statistics/?set=temp1" title="<?= $language->graphics; ?> - <?= $dashboard->temp1; ?>">
                                 <div class="collumn-left">
                                     <i class="wi wi-thermometer"></i>
                                 </div>

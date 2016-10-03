@@ -85,7 +85,7 @@ class Insert {
      */
     protected function check_secret() {
         if ( ! isset($_POST['ID']) || $_POST['ID'] != $this->arduino['secret'])
-            \Core\Router::redirect('/');
+            \Core\Router::redirect(DIR_ROOT);
     } // protected function check_secret()
 
 
@@ -116,7 +116,7 @@ class Insert {
      */
     protected function save_to_database() {
         if (empty($this->params) || ! is_array($this->params))
-            \Core\Router::redirect('/');
+            \Core\Router::redirect(DIR_ROOT);
 
         $this->parent->mysql->save(
                 'data', 

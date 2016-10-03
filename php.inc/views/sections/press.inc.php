@@ -1,5 +1,5 @@
                         <div class="tile bg-cobalt">
-                            <a href="/statistics/?set=press" title="<?= $language->graphics; ?> - <?= $dashboard->press; ?>">
+                            <a href="<?= DIR_ROOT ?>statistics/?set=press" title="<?= $language->graphics; ?> - <?= $dashboard->press; ?>">
                                 <div class="collumn-left">
                                     <i class="wi wi-barometer"></i>
                                 </div>

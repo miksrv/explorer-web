@@ -1,5 +1,5 @@
                         <div class="tile bg-green">
-                            <a href="/statistics/?set=light" title="<?= $language->graphics; ?> - <?= $dashboard->light; ?>">
+                            <a href="<?= DIR_ROOT ?>statistics/?set=light" title="<?= $language->graphics; ?> - <?= $dashboard->light; ?>">
                                 <div class="collumn-left">
                                     <i class="wi wi-day-sunny"></i>
                                 </div>
