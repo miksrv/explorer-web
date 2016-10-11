@@ -14,4 +14,6 @@
     $config['gmt_offset'] = '1';
     $config['secret']     = '';
 
+    $config['mac_address'] = '';
+
 /* Location: /php.inc/config/arduino.php */

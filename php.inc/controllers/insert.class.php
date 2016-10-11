@@ -56,6 +56,7 @@ class Insert {
         $this->check_secret();
         $this->get_weather_params();
         $this->save_to_database();
+        $this->send_to_narodmon();
 
         $this->parent->view->json(array('code' => 'success'));
     } // function write()
@@ -123,6 +124,33 @@ class Insert {
                 array('data' => $this->params)
             );
     } // protected function save_to_database()
+
+
+    /**
+     * Sending data to the national monitoring server
+     * 
+     * @access protected
+     * @return void
+     */
+    protected function send_to_narodmon() {
+        if (empty($this->params) || ! is_array($this->params))
+            return;
+
+        $post = array(
+            'ID' => $this->arduino['mac_address'],
+            'T1' => $this->params['temp1'],
+            'T2' => $this->params['temp2'],
+            'H'  => $this->params['humd'],
+            'P'  => $this->params['press'],
+            'L'  => $this->params['light'],
+            'W'  => $this->params['wind'],
+            'V'  => $this->params['battery']
+        );
+
+        $narodmon = new \Libraries\Narodmon();
+
+        $narodmon->send($post);
+    } // protected function send_to_narodmon()
 }
 
 /* Location: /php.inc/controllers/insert.class.php */
