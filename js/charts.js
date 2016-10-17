@@ -12,17 +12,12 @@ Highcharts.createElement('link', {
 
 Highcharts.theme = {
    colors: ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
-      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee", '#FFA500'],
    chart: {
-      backgroundColor: {
-         linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-         stops: [
-            [0, '#2a2a2b'],
-            [1, '#3e3e40']
-         ]
-      },
+      backgroundColor: '#2a2a2b',
       style: {
-         fontFamily: "'Unica One', sans-serif"
+         fontFamily: "sans-serif",
+         fontSize: '13px'
       },
       plotBorderColor: '#606063'
    },
@@ -100,14 +95,15 @@ Highcharts.theme = {
    },
    legend: {
       itemStyle: {
-         color: '#E0E0E3'
+         color: '#E0E0E3',
+         fontWeight: 'normal',
       },
       itemHoverStyle: {
          color: '#FFF'
       },
       itemHiddenStyle: {
          color: '#606063'
-      }
+      },
    },
    credits: {
       style: {
@@ -138,7 +134,6 @@ Highcharts.theme = {
       }
    },
 
-   // scroll charts
    rangeSelector: {
       buttonTheme: {
          fill: '#505053',
@@ -200,7 +195,6 @@ Highcharts.theme = {
       trackBorderColor: '#404043'
    },
 
-   // special colors for some of the
    legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
    background2: '#505053',
    dataLabelsColor: '#B0B0B3',
@@ -209,174 +203,237 @@ Highcharts.theme = {
    maskColor: 'rgba(255,255,255,0.3)'
 };
 
-// Apply the theme
 Highcharts.setOptions(Highcharts.theme);
 
 Highcharts.setOptions({
-        lang: {
-            loading: 'Загрузка...',
-            months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-            shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
-            exportButtonTitle: "Экспорт",
-            printButtonTitle: "Печать",
-            rangeSelectorFrom: "С",
-            rangeSelectorTo: "По",
-            rangeSelectorZoom: "Период",
-            downloadPNG: 'Скачать PNG',
-            downloadJPEG: 'Скачать JPEG',
-            downloadPDF: 'Скачать PDF',
-            downloadSVG: 'Скачать SVG',
-            printChart: 'Напечатать график'
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0,
-                borderWidth: 0,
-                groupPadding: 0,
-                shadow: false
-            }
+    lang: {
+        loading: 'Загрузка...',
+        months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+        weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
+        shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек'],
+        exportButtonTitle: "Экспорт",
+        printButtonTitle: "Печать",
+        rangeSelectorFrom: "С",
+        rangeSelectorTo: "По",
+        rangeSelectorZoom: "Период",
+        downloadPNG: 'Скачать PNG',
+        downloadJPEG: 'Скачать JPEG',
+        downloadPDF: 'Скачать PDF',
+        downloadSVG: 'Скачать SVG',
+        printChart: 'Напечатать график'
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0,
+            borderWidth: 0,
+            groupPadding: 0,
+            shadow: false
         }
     }
+}
 );
 
 $(function () {
-    
-    counter = 0;
-
-    /**
-     * In order to synchronize tooltips and crosshairs, override the
-     * built-in events with handlers defined on the parent element.
-     */
-    $('#container').bind('mousemove touchmove touchstart', function (e) {
-        var chart,
-            point,
-            i,
-            event;
-
-        for (i = 0; i < Highcharts.charts.length; i = i + 1) {
-            chart = Highcharts.charts[i];
-            event = chart.pointer.normalize(e.originalEvent); // Find coordinates within the chart
-            point = chart.series[0].searchPoint(event, true); // Get the hovered point
-
-            if (point) {
-                point.highlight(e);
-            }
-        }
-    });
-    /**
-     * Override the reset function, we don't need to hide the tooltips and crosshairs.
-     */
-    Highcharts.Pointer.prototype.reset = function () {
-        return undefined;
-    };
-
-    /**
-     * Highlight a point by showing tooltip, setting hover state and draw crosshair
-     */
-    Highcharts.Point.prototype.highlight = function (event) {
-        this.onMouseOver(); // Show the hover marker
-        this.series.chart.tooltip.refresh(this); // Show the tooltip
-        this.series.chart.xAxis[0].drawCrosshair(event, this); // Show the crosshair
-    };
-
-    /**
-     * Synchronize zooming through the setExtremes event handler.
-     */
-    function syncExtremes(e) {
-        var thisChart = this.chart;
-
-        if (e.trigger !== 'syncExtremes') { // Prevent feedback loop
-            Highcharts.each(Highcharts.charts, function (chart) {
-                if (chart !== thisChart) {
-                    if (chart.xAxis[0].setExtremes) { // It is null while updating
-                        chart.xAxis[0].setExtremes(e.min, e.max, undefined, false, { trigger: 'syncExtremes' });
+    $.getJSON(dir_root + 'statistics?data=true', function (data) {
+        $('#container1').highcharts({
+            title: {
+                text: ''
+            },
+            credits: {
+                enabled: false
+            },
+            xAxis: [{
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    month: '%e %b, %Y',
+                    year: '%b'
+                },
+                tickInterval: 3600 * 1000,
+            }],
+            yAxis: [{
+                labels: {
+                    format: '{value}°C',
+                    style: {
+                        color: Highcharts.getOptions().colors[2]
                     }
+                },
+                title: {
+                    text: 'Температура',
+                    style: {
+                        color: Highcharts.getOptions().colors[2]
+                    }
+                },
+                opposite: false,
+
+            }, {
+                gridLineWidth: 0,
+                title: {
+                    text: 'Влажность',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                labels: {
+                    format: '{value} %',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                opposite: true,
+                min: 0,
+                max: 100,
+
+            }],
+            tooltip: {
+                shared: true,
+                xDateFormat: '%A, %d %B %Y, %H:%M'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 60,
+                verticalAlign: 'top',
+                y: 8,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            series: [{
+                name: 'Влажность',
+                type: 'area',
+                yAxis: 1,
+                data: data.humd,
+                tooltip: {
+                    valueSuffix: ' %'
                 }
-            });
-        }
-    }
 
-    $.getJSON('/statistics?data=true&set=' + set, function (activity) {
-        $.each(activity.datasets, function (i, dataset) {
+            }, {
+                name: 'На улице',
+                type: 'spline',
+                data: data.temp1,
+                color: Highcharts.getOptions().colors[2],
+                tooltip: {
+                    valueSuffix: ' °C'
+                }
+            }, {
+                name: 'В помещении',
+                type: 'spline',
+                data: data.temp2,
+                color: Highcharts.getOptions().colors[5],
+                tooltip: {
+                    valueSuffix: ' °C'
+                }
+            }]
+        });
 
-            // Add X values
-            dataset.data = Highcharts.map(dataset.data, function (val, j) {
-                return [Date.parse(activity.xData[j]), val];
-            });
+        $('#container2').highcharts({
+            title: {
+                text: ''
+            },
+            credits: {
+                enabled: false
+            },
+            xAxis: [{
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    month: '%e %b, %Y',
+                    year: '%b'
+                },
+                tickInterval: 3600 * 1000,
+            }],
+            yAxis: [{
+                labels: {
+                    style: {
+                        color: Highcharts.getOptions().colors[11]
+                    }
+                },
+                title: {
+                    text: 'Освещенность (lux)',
+                    style: {
+                        color: Highcharts.getOptions().colors[11]
+                    }
+                },
+                opposite: false,
 
-            $('<div class="chart">')
-                .appendTo('#container')
-                .highcharts({
-                    chart: {
-                        marginLeft: 40, // Keep all charts left aligned
-                        spacingTop: 20,
-                        spacingBottom: 20,
-                        height: 300
-                    },
-                    title: {
-                        text: dataset.name,
-                        align: 'left',
-                        margin: 0,
-                        x: 30
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    legend: {
-                        enabled: false
-                    },
-                    xAxis: {
-                        crosshair: true,
-                        events: {
-                            setExtremes: syncExtremes
-                        },
-                        type: 'datetime',
-                        labels: {
-                            formatter: function () {
-                                return Highcharts.dateFormat('%d %b %H:%M', this.value);
-                            },
-                        }
-                    },
-                    yAxis: {
-                        title: {
-                            text: null
-                        },
-                        min: dataset.min,
-                        max: dataset.max,
-                    },
-                    tooltip: {
-                        positioner: function () {
-                            return {
-                                x: this.chart.chartWidth - this.label.width, // right aligned
-                                y: -1 // align to title
-                            };
-                        },
-                        borderWidth: 0,
-                        backgroundColor: 'none',
-                        pointFormat: '{point.y}',
-                        headerFormat: '',
-                        shadow: false,
-                        style: {
-                            fontSize: '18px'
-                        },
-                        valueDecimals: dataset.valueDecimals
-                    },
-                    series: [{
-                        data: dataset.data,
-                        name: dataset.name,
-                        type: dataset.type,
-                        pointWidth: 10,
-                        color: Highcharts.getOptions().colors[counter],
-                        fillOpacity: 0.3,
-                        tooltip: {
-                            valueSuffix: ' ' + dataset.unit
-                        }
-                    }]
-                });
-                
-                counter++;
+            }, {
+                gridLineWidth: 0,
+                title: {
+                    text: 'Скорость ветра (м/с)',
+                    style: {
+                        color: Highcharts.getOptions().colors[9]
+                    }
+                },
+                labels: {
+                    style: {
+                        color: Highcharts.getOptions().colors[9]
+                    }
+                },
+                opposite: true,
+            }, {
+                gridLineWidth: 0,
+                title: {
+                    text: 'Атмосферное давление (мм.рт.ст.)',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                labels: {
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                opposite: true,
+            }],
+            tooltip: {
+                shared: true,
+                xDateFormat: '%A, %d %B %Y, %H:%M'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 60,
+                verticalAlign: 'top',
+                y: 8,
+                floating: true,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+            },
+            series: [{
+                name: 'Освещенность',
+                type: 'area',
+                yAxis: 0,
+                data: data.light,
+                color: Highcharts.getOptions().colors[11],
+                tooltip: {
+                    valueSuffix: ' lux'
+                }
+            }, {
+                name: 'Скорость ветра',
+                type: 'column',
+                yAxis: 1,
+                data: data.wind,
+                pointWidth: 1,
+                color: '#7798BF99',
+                marker: {
+                    enabled: false
+                },
+                tooltip: {
+                    valueSuffix: ' м/с'
+                }
+
+            }, {
+                name: 'Атмосферное давление',
+                type: 'spline',
+                yAxis: 2,
+                data: data.press,
+                color: Highcharts.getOptions().colors[1],
+                marker: {
+                    enabled: false
+                },
+                dashStyle: 'shortdot',
+                tooltip: {
+                    valueSuffix: ' мм.рт.ст.'
+                }
+
+            }]
         });
     });
-
 });

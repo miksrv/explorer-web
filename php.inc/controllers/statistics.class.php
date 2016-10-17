@@ -16,7 +16,7 @@
  * @subpackage Controllers
  * @category Statistics
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.1 (13.09.2016)
+ * @version 1.1.0 (17.10.2016)
  */
 class Statistics {
 
@@ -83,21 +83,13 @@ class Statistics {
     protected function load_database() {
         $section = new \Models\Statistics();
 
-        $set = filter_input(INPUT_GET, 'set', FILTER_SANITIZE_ENCODED);
-
-        if ( ! key_exists($set, $section->data_sets)) {
-
-            $set = key($section->data_sets);
-
-        }
-
-        $param['sql'] = "SELECT datestamp, {$set} "
-                      . "FROM data WHERE `datestamp` >= DATE_SUB(NOW(), INTERVAL 1 WEEK) "
+        $param['sql'] = "SELECT * "
+                      . "FROM data WHERE `datestamp` >= DATE_SUB(NOW(), INTERVAL 2 DAY) "
                       . "ORDER BY `datestamp` DESC";
 
         $data = $this->parent->mysql->get_data('data', $param);
 
-        return $section->make_data_graphs($set, $data);
+        return $section->make_data_graphs($data);
     } // protected function load_database()
 }
 

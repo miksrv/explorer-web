@@ -18,70 +18,9 @@
  * @subpackage Models
  * @category Statistics
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.0 (13.09.2016)
+ * @version 1.1.0 (17.10.2016)
  */
 class Statistics extends \Core\BaseModel {
-
-    /**
-     * Set the parameters for plotting
-     * @var array
-     */
-    var $data_sets = array(
-        'temp1' => array(
-            "name" => "On the street",
-            "data" => array(),
-            "unit" => "C",
-            "type" => "line",
-            "valueDecimals" => 1
-        ),
-        'temp2' => array(
-            "name" => "In room",
-            "data" => array(),
-            "unit" => "C",
-            "type" => "line",
-            "valueDecimals" => 1
-        ),
-        'humd' => array(
-            "name" => "Air humidity",
-            "data" => array(),
-            "unit" => "%",
-            "type" => "area",
-            "min" => 0,
-            "max" => 100,
-            "valueDecimals" => 1
-        ),
-        'press' => array(
-            "name" => "Pressure (mm)",
-            "data" => array(),
-            "unit" => "мм.рт.ст.",
-            "type" => "area",
-            "min" => 700,
-            "max" => 800,
-            "valueDecimals" => 0
-        ),
-        'light' => array(
-            "name" => "Illuminance (lx)",
-            "data" => array(),
-            "unit" => "lux",
-            "type" => "area",
-            "valueDecimals" => 0
-        ),
-        'wind' => array(
-            "name" => "Wind (m\s)",
-            "data" => array(),
-            "unit" => "м/с",
-            "type" => "column",
-            "valueDecimals" => 1
-        ),
-        'battery' => array(
-            "name" => "Voltage (battery)",
-            "data" => array(),
-            "unit" => "В",
-            "type" => "area",
-            "valueDecimals" => 1
-        ),
-    );
-
 
     /**
      * CLASS CONSTRUCTOR
@@ -108,47 +47,30 @@ class Statistics extends \Core\BaseModel {
      * @param array $data mysql-data
      * @return array
      */
-    function make_data_graphs($set, $data) {
-        $json  = array(
-            'xData' => array(),
-            'datasets' => array(
-                $set => $this->data_sets[$set],
-            ),
-        );
+    function make_data_graphs($data) {
+        $result = array();
 
         foreach ($data as $array) {
-            foreach ($array as $key => $val) {
+            $date = new \DateTime($array['datestamp']);
+            $date = $date->getTimestamp() * 1000; // $date->format('m/d/Y H:i');
 
-                switch ($key) {
-                    case 'datestamp' :
-                        $date = new \DateTime($val);
+            $result['datetime'][] = $date;
+            $result['temp1'][] = array($date, (float) $array['temp1']);
+            $result['temp2'][] = array($date, (float) $array['temp2']);
+            $result['humd'][]  = array($date, (float) $array['humd']);
+            
+            $result['light'][] = array($date, (float) $array['light']);
+            
+            if ($array['wind'] < 30) {
+                $result['wind'][]  = array($date, (float) $array['wind']);
+            }
 
-                        $json['xData'][] = $date->format('m/d/Y H:i') . ' GMT';
-                        break;
-
-                    case 'temp1' :
-                    case 'temp2' :
-                    case 'humd'  :
-                    case 'light' :
-                    case 'wind'  :
-                    case 'battery' :
-
-                        if (isset($json['datasets'][$key])) {
-                            $json['datasets'][$key]['data'][] = (float) $val;
-                        }
-                        break;
-
-                    case 'press' :
-                        if ($val >= 700 && $val <= 800) {
-                            $json['datasets'][$key]['data'][] = (float) $val;
-                        }
-                        break;
-                }
-               
+            if ($array['press'] > 700 && $array['press'] < 800) {
+                $result['press'][] = array($date, (float) $array['press']);
             }
         }
 
-        return $json;
+        return $result;
     } // function make_data_graphs($set, $data)
 
 }

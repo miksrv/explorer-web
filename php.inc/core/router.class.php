@@ -92,13 +92,14 @@ class Router {
      */
     static function get_uri() {
         $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
-        
+
         $uri = preg_replace('|'.dirname($_SERVER['PHP_SELF']).'|i', '', $uri_parts[0]);
         $uri = str_replace("/", "", $uri);
 
         return $uri;
     } // static function get_uri()
-    
+
+
     /**
      * Redirect to another page
      * 

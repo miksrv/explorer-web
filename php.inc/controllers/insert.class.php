@@ -16,7 +16,7 @@
  * @subpackage Controllers
  * @category Insert
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.2 (01.09.2016)
+ * @version 1.0.3 (17.10.2016)
  */
 class Insert {
 
@@ -25,7 +25,7 @@ class Insert {
      * @var object 
      */
     private $parent;
-    
+
     /**
      * Loaded config for arduino
      * @var array
@@ -138,8 +138,8 @@ class Insert {
 
         $post = array(
             'ID' => $this->arduino['mac_address'],
-            'T1' => $this->params['temp1'],
-            'T2' => $this->params['temp2'],
+            'T1' => $this->params['temp2'],
+            'T2' => $this->params['temp1'],
             'H'  => $this->params['humd'],
             'P'  => $this->params['press'],
             'L'  => $this->params['light'],

@@ -131,8 +131,8 @@ class Loader {
 
         return $path . $file;
     } // private function _get_file_namespace($namespace)
-    
-    
+
+
     /**
      * Returns the file name by class
      * 

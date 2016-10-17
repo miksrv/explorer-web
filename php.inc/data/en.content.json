@@ -8,7 +8,9 @@
             "address": "Orenburg, Chkalov street",
             "country": "Russian Federation"
         },
-        "graphics": "Graphics"
+        "graphics": "Graphics",
+        "charts1": "Temperature and humidity",
+        "charts2": "Atmospheric pressure, wind speed and lighting"
     },
     "dashboard": {
         "temp1": "On the street",

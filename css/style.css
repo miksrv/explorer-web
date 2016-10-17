@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 html * {
-    -webkit-font-smoothing: antialiased;tile
+    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
@@ -91,6 +91,9 @@ header .logo img {
     margin-right: 0.5em;
     height: 44px;
     margin-top: -4px;
+}
+header .logo a {
+    border-bottom: 0;
 }
 footer {
     color: #CCC;
