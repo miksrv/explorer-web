@@ -248,7 +248,7 @@ $(function () {
                     month: '%e %b, %Y',
                     year: '%b'
                 },
-                tickInterval: 3600 * 1000,
+                tickInterval: 3600 * 1000 * 2,
             }],
             yAxis: [{
                 labels: {
@@ -338,7 +338,7 @@ $(function () {
                     month: '%e %b, %Y',
                     year: '%b'
                 },
-                tickInterval: 3600 * 1000,
+                tickInterval: 3600 * 1000 * 2,
             }],
             yAxis: [{
                 labels: {
@@ -411,7 +411,7 @@ $(function () {
                 yAxis: 1,
                 data: data.wind,
                 pointWidth: 1,
-                color: '#7798BF99',
+                color: '#7898BF',
                 marker: {
                     enabled: false
                 },
