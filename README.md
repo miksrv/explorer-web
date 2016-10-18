@@ -84,6 +84,7 @@ The following components and classes were used in the development of application
 
 * [Weather Icons] [WeatherIcons] - Erik Flowers
 * [Font Awesome] [FontAwesome] - created and maintained by Dave Gandy
+* [Highcharts] [Highcharts] - Highsoft AS, Sentrumsgata, 6893 VIK I SOGN, Norway.
 * [Moon phase calculation class] [MoonPhase] by Samir Shah
 * Calculates the moon rise/set by [Keith Burnett] [KeithBurnett] and [Matt Hackmann] [MattHackmann]
 
@@ -92,3 +93,4 @@ The following components and classes were used in the development of application
    [MoonPhase]: <http://rayofsolaris.net>
    [KeithBurnett]: <http://bodmas.org>
    [MattHackmann]: <http://dxprog.com>
+   [Highcharts]: <http://www.highcharts.com/>

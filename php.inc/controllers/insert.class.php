@@ -98,8 +98,8 @@ class Insert {
      */
     protected function get_weather_params() {
         $this->params = array(
-            'temp1' => $_POST['t1'] ? (float) $_POST['t1'] : 0.0,
-            'temp2' => $_POST['t2'] ? (float) $_POST['t2'] : 0.0,
+            'temp1' => $_POST['t2'] ? (float) $_POST['t2'] : 0.0,
+            'temp2' => $_POST['t1'] ? (float) $_POST['t1'] : 0.0,
             'humd'  => $_POST['h'] ? (float) $_POST['h'] : 0.0,
             'press' => $_POST['p'] ? (float) $_POST['p'] : 0.0,
             'light' => $_POST['l'] ? (int) $_POST['l'] : 0,
@@ -138,8 +138,8 @@ class Insert {
 
         $post = array(
             'ID' => $this->arduino['mac_address'],
-            'T1' => $this->params['temp2'],
-            'T2' => $this->params['temp1'],
+            'T1' => $this->params['temp1'],
+            'T2' => $this->params['temp2'],
             'H'  => $this->params['humd'],
             'P'  => $this->params['press'],
             'L'  => $this->params['light'],

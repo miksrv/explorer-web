@@ -57,7 +57,7 @@
         <footer>
             <div class="wrapper content">
                 <div>Powered by Arduino & PHP\HTML - See on <a href="https://github.com/miksrv/explorer" title="" target="_blank">Github</a></div>
-                <div>Copyright &copy; <a href="http://miksrv.ru" title="" target="_blank">Mishka</a> & weather icons &copy; <a href="http://erikflowers.github.io/weather-icons" title="" target="_blank">Erik Flowers</a></div>
+                <div>Copyright &copy; <a href="http://miksrv.ru" title="" target="_blank">Mishka</a> 2016</div>
             </div>
         </footer>
     </body>
