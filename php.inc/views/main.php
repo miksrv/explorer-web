@@ -78,6 +78,9 @@
                         <?php else: ?><i class="wi wi-na"></i>
                         <?php endif; ?>
                     </div>
+                    <div class="hint">
+                        <?= $language->forecast_weather ?>: <?= $language->forecast[$summary->forecast] ?>
+                    </div>
                 </div>
             </div>
         </section>

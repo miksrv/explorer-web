@@ -14,9 +14,9 @@
  * 
  * @package Automated weather station
  * @subpackage Libraries
- * @category Lang
+ * @category Narodmon
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.0 (11.10.2016)
+ * @version 1.0.1 (20.10.2016)
  */
 class Narodmon  {
 

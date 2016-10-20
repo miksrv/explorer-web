@@ -18,7 +18,7 @@
  * @subpackage Models
  * @category Dashboard
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.1 (07.09.2016)
+ * @version 1.1.0 (20.10.2016)
  */
 class Dashboard extends \Core\BaseModel {
 
@@ -58,7 +58,7 @@ class Dashboard extends \Core\BaseModel {
     function get() {
         return $this;
     } // function get()
-
+    
 
     /**
      * @return string
@@ -162,14 +162,17 @@ class Dashboard extends \Core\BaseModel {
         $signs      = array();
 
         foreach ($comparison as $key) {
-            if ( ! isset($data[$key]) && ! isset($data['average'][$key]))
+            if ( ! isset($data[$key]))
                 continue;
 
-            if ($data['average'][$key] > $data[$key])
+            if (isset($data['average'][$key]) && $data['average'][$key] > $data[$key])
                 $signs[$key] = '<i class="fa fa-long-arrow-down"></i>';
 
-            else if ($data['average'][$key] < $data[$key])
+            else if (isset($data['average'][$key]) && $data['average'][$key] < $data[$key])
                 $signs[$key] = '<i class="fa fa-long-arrow-up"></i>';
+            
+            else
+                $signs[$key] = '';
         }
 
         return $signs;

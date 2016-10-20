@@ -16,7 +16,7 @@
  * @subpackage Controllers
  * @category Main
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.0 (25.08.2016)
+ * @version 1.1.0 (20.10.2016)
  */
 class Main {
 
@@ -77,8 +77,9 @@ class Main {
 
 
     protected function load_database() {
-        $param['sql'] = "SELECT CURRENT.*, MAX.max_temp1, MIN.min_temp1 FROM "
-                      . "(SELECT * FROM data ORDER BY `datestamp` DESC LIMIT 1 ) CURRENT, "
+        $param['sql'] = "SELECT CURRENT.*, MAX.max_temp1, MIN.min_temp1, PRESS.prev_pressure FROM "
+                      . "(SELECT * FROM data ORDER BY `datestamp` DESC LIMIT 1) CURRENT, "
+                      . "(SELECT press AS `prev_pressure` FROM data WHERE `datestamp` >= DATE_SUB(NOW(), INTERVAL 1 WEEK) LIMIT 1) PRESS, "
                       . "(SELECT MAX(temp1) AS `max_temp1` FROM data WHERE DATE_FORMAT(`datestamp`, '%Y-%m-%d') = CURDATE() LIMIT 1) MAX, "
                       . "(SELECT MIN(temp1) AS `min_temp1` FROM data WHERE DATE_FORMAT(`datestamp`, '%Y-%m-%d') = CURDATE() LIMIT 1) MIN";
 
@@ -112,8 +113,10 @@ class Main {
         $section->time_update  = format_date($this->data['datestamp']);
         $section->time_elapsed = time_elapsed_string($this->data['datestamp']);
 
-        $section->background   = $section->get_background_img();
-        $section->moon_phase   = $section->get_moon_phase_name();
+        $section->background = $section->get_background_img();
+        $section->moon_phase = $section->get_moon_phase_name();
+
+        $section->forecast = $section->forecast();
 
         $this->parent->view->assign('summary', $section->get());
     } // protected function load_summary()

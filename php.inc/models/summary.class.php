@@ -18,7 +18,7 @@
  * @subpackage Models
  * @category Summary
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.0 (25.08.2016)
+ * @version 1.1.0 (20.10.2016)
  */
 class Summary extends \Core\BaseModel {
 
@@ -75,6 +75,16 @@ class Summary extends \Core\BaseModel {
         
         return $name . '.jpg';
     } // function get_background_img()
+
+
+    /**
+     * @return string
+     */
+    function forecast() {
+        $library = new \Libraries\Forecast();
+
+        return $library->forecast($this->data['press'], $this->data['prev_pressure']);
+    } // function forecast()
 }
 
 /* Location: /php.inc/models/summary.class.php */
