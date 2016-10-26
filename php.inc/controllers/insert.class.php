@@ -16,7 +16,7 @@
  * @subpackage Controllers
  * @category Insert
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.3 (17.10.2016)
+ * @version 1.0.4 (26.10.2016)
  */
 class Insert {
 
@@ -98,14 +98,20 @@ class Insert {
      */
     protected function get_weather_params() {
         $this->params = array(
-            'temp1' => $_POST['t2'] ? (float) $_POST['t2'] : 0.0,
-            'temp2' => $_POST['t1'] ? (float) $_POST['t1'] : 0.0,
-            'humd'  => $_POST['h'] ? (float) $_POST['h'] : 0.0,
-            'press' => $_POST['p'] ? (float) $_POST['p'] : 0.0,
-            'light' => $_POST['l'] ? (int) $_POST['l'] : 0,
-            'wind'  => $_POST['w'] ? (float) $_POST['w'] : 0.0,
-            'battery' => $_POST['v'] ? (float) $_POST['v'] : 0.0
+            'temp1' => $_POST['t2'] ? (float) $_POST['t2'] : NULL,
+            'temp2' => $_POST['t1'] ? (float) $_POST['t1'] : NULL,
+            'humd'  => $_POST['h'] ? (float) $_POST['h'] : NULL,
+            'press' => $_POST['p'] ? (float) $_POST['p'] : NULL,
+            'light' => $_POST['l'] ? (int) $_POST['l'] : NULL,
+            'wind'  => $_POST['w'] ? (float) $_POST['w'] : NULL,
+            'battery' => $_POST['v'] ? (float) $_POST['v'] : NULL
         );
+        
+        foreach ($this->params as $key => $val) {
+            if (is_null($this->params[$key])) {
+                unset($this->params[$key]);
+            }
+        }
     } // protected function get_weather_params()
 
 
