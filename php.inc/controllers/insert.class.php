@@ -16,7 +16,7 @@
  * @subpackage Controllers
  * @category Insert
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.4 (26.10.2016)
+ * @version 1.0.5 (28.10.2016)
  */
 class Insert {
 
@@ -106,12 +106,8 @@ class Insert {
             'wind'  => $_POST['w'] ? (float) $_POST['w'] : NULL,
             'battery' => $_POST['v'] ? (float) $_POST['v'] : NULL
         );
-        
-        foreach ($this->params as $key => $val) {
-            if (is_null($this->params[$key])) {
-                unset($this->params[$key]);
-            }
-        }
+
+        $this->params = $this->clear_array($this->params);
     } // protected function get_weather_params()
 
 
@@ -144,19 +140,40 @@ class Insert {
 
         $post = array(
             'ID' => $this->arduino['mac_address'],
-            'T1' => $this->params['temp1'],
-            'T2' => $this->params['temp2'],
-            'H'  => $this->params['humd'],
-            'P'  => $this->params['press'],
-            'L'  => $this->params['light'],
-            'W'  => $this->params['wind'],
-            'V'  => $this->params['battery']
+            'T1' => isset($this->params['temp1']) ? $this->params['temp1'] : NULL,
+            'T2' => isset($this->params['temp2']) ? $this->params['temp2'] : NULL,
+            'H'  => isset($this->params['humd']) ? $this->params['humd'] : NULL,
+            'P'  => isset($this->params['press']) ? $this->params['press'] : NULL,
+            'L'  => isset($this->params['light']) ? $this->params['light'] : NULL,
+            'W'  => isset($this->params['wind']) ? $this->params['wind'] : NULL,
+            'V'  => isset($this->params['battery']) ? $this->params['battery'] : NULL
         );
 
         $narodmon = new \Libraries\Narodmon();
 
-        $narodmon->send($post);
+        $narodmon->send($this->clear_array($post));
     } // protected function send_to_narodmon()
+
+
+    /**
+     * The method removes from the array nulls
+     * 
+     * @param array
+     * @return array
+     */
+    protected function clear_array($data) {
+        if ( ! is_array($data) || empty($data)) {
+            return array();
+        }
+
+        foreach ($data as $key => $val) {
+            if (is_null($data[$key])) {
+                unset($data[$key]);
+            }
+        }
+
+        return $data;
+    } // protected function clear_array($data)
 }
 
 /* Location: /php.inc/controllers/insert.class.php */

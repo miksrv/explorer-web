@@ -206,6 +206,9 @@ Highcharts.theme = {
 Highcharts.setOptions(Highcharts.theme);
 
 Highcharts.setOptions({
+    global: {
+        useUTC: false
+    },
     lang: {
         loading: 'Загрузка...',
         months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
@@ -230,8 +233,7 @@ Highcharts.setOptions({
             shadow: false
         }
     }
-}
-);
+});
 
 $(function () {
     $.getJSON(dir_root + 'statistics?data=true', function (data) {
@@ -428,7 +430,6 @@ $(function () {
                 marker: {
                     enabled: false
                 },
-                dashStyle: 'shortdot',
                 tooltip: {
                     valueSuffix: ' мм.рт.ст.'
                 }
