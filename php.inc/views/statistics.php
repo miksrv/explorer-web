@@ -45,19 +45,34 @@
         <section>
             <div class="wrapper content">
                 <h2><?= $language->graphics; ?></h2>
+                <div><?= $language->period->title ?>: 
+                    <a href="javascript:void(0)" data-role="period" class="active" data-period="day" title=""><?= $language->period->day ?></a>
+                    <a href="javascript:void(0)" data-role="period" data-period="week" title=""><?= $language->period->week ?></a>
+                    <a href="javascript:void(0)" data-role="period" data-period="month" title=""><?= $language->period->month ?></a>
+                </div>
                 <h5><?= $language->charts1; ?></h5>
                 <a name="chart1"></a>
-                <div id="container1"></div>
+                <div id="container1">
+                    <div class="loading"></div>
+                </div>
                 <br>
                 <h5><?= $language->charts2; ?></h5>
                 <a name="chart2"></a>
-                <div id="container2"></div>
+                <div id="container2">
+                    <div class="loading"></div>
+                </div>
+                <br>
+                <h5><?= $language->charts3; ?></h5>
+                <a name="chart3"></a>
+                <div id="container3">
+                    <div class="loading"></div>
+                </div>
             </div>
         </section>
         <footer>
             <div class="wrapper content">
                 <div>Powered by Arduino & PHP\HTML - See on <a href="https://github.com/miksrv/explorer" title="" target="_blank">Github</a></div>
-                <div>Copyright &copy; <a href="http://miksrv.ru" title="" target="_blank">Mishka</a> 2016</div>
+                <div>Copyright &copy; <a href="http://miksrv.ru" title="" target="_blank">Mishka</a> 2016, Version <i><?= VERSION ?></i></div>
             </div>
         </footer>
     </body>

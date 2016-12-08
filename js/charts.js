@@ -1,9 +1,3 @@
-/**
- * Dark theme for Highcharts JS
- * @author Torstein Honsi
- */
-
-// Load the fonts
 Highcharts.createElement('link', {
    href: 'https://fonts.googleapis.com/css?family=Unica+One',
    rel: 'stylesheet',
@@ -235,206 +229,284 @@ Highcharts.setOptions({
     }
 });
 
+function create_chart(data) {
+    $('#container1').highcharts({
+        title: {
+            text: ''
+        },
+        credits: {
+            enabled: false
+        },
+        xAxis: [{
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                month: '%e %b, %Y',
+                year: '%b'
+            },
+            tickInterval: 3600 * 1000 * 2,
+        }],
+        yAxis: [{
+            labels: {
+                format: '{value}°C',
+                style: {
+                    color: Highcharts.getOptions().colors[2]
+                }
+            },
+            title: {
+                text: 'Температура',
+                style: {
+                    color: Highcharts.getOptions().colors[2]
+                }
+            },
+            opposite: false,
+
+        }, {
+            gridLineWidth: 0,
+            title: {
+                text: 'Влажность',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                format: '{value} %',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            opposite: true,
+            min: 0,
+            max: 100,
+
+        }],
+        tooltip: {
+            shared: true,
+            xDateFormat: '%A, %d %B %Y, %H:%M'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            x: 60,
+            verticalAlign: 'top',
+            y: 8,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: 'Влажность',
+            type: 'area',
+            yAxis: 1,
+            data: data.humd,
+            tooltip: {
+                valueSuffix: ' %'
+            }
+
+        }, {
+            name: 'На улице',
+            type: 'spline',
+            data: data.temp1,
+            color: Highcharts.getOptions().colors[2],
+            tooltip: {
+                valueSuffix: ' °C'
+            }
+        }, {
+            name: 'В помещении',
+            type: 'spline',
+            data: data.temp2,
+            color: Highcharts.getOptions().colors[5],
+            tooltip: {
+                valueSuffix: ' °C'
+            }
+        }]
+    });
+
+    $('#container2').highcharts({
+        title: {
+            text: ''
+        },
+        credits: {
+            enabled: false
+        },
+        xAxis: [{
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                month: '%e %b, %Y',
+                year: '%b'
+            },
+            tickInterval: 3600 * 1000 * 2,
+        }],
+        yAxis: [{
+            labels: {
+                style: {
+                    color: Highcharts.getOptions().colors[11]
+                }
+            },
+            title: {
+                text: 'Освещенность (lux)',
+                style: {
+                    color: Highcharts.getOptions().colors[11]
+                }
+            },
+            opposite: false,
+
+        }, {
+            gridLineWidth: 0,
+            title: {
+                text: 'Скорость ветра (м/с)',
+                style: {
+                    color: Highcharts.getOptions().colors[9]
+                }
+            },
+            labels: {
+                style: {
+                    color: Highcharts.getOptions().colors[9]
+                }
+            },
+            opposite: true,
+        }, {
+            gridLineWidth: 0,
+            title: {
+                text: 'Атмосферное давление (мм.рт.ст.)',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            labels: {
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            opposite: true,
+        }],
+        tooltip: {
+            shared: true,
+            xDateFormat: '%A, %d %B %Y, %H:%M'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            x: 60,
+            verticalAlign: 'top',
+            y: 8,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: 'Освещенность',
+            type: 'area',
+            yAxis: 0,
+            data: data.light,
+            color: Highcharts.getOptions().colors[11],
+            tooltip: {
+                valueSuffix: ' lux'
+            }
+        }, {
+            name: 'Скорость ветра',
+            type: 'column',
+            yAxis: 1,
+            data: data.wind,
+            pointWidth: 1,
+            color: '#7898BF',
+            marker: {
+                enabled: false
+            },
+            tooltip: {
+                valueSuffix: ' м/с'
+            }
+
+        }, {
+            name: 'Атмосферное давление',
+            type: 'spline',
+            yAxis: 2,
+            data: data.press,
+            color: Highcharts.getOptions().colors[1],
+            marker: {
+                enabled: false
+            },
+            tooltip: {
+                valueSuffix: ' мм.рт.ст.'
+            }
+
+        }]
+    });
+
+    $('#container3').highcharts({
+        title: {
+            text: ''
+        },
+        credits: {
+            enabled: false
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                month: '%e %b, %Y',
+                year: '%b'
+            },
+            tickInterval: 3600 * 1000 * 2,
+        },
+        yAxis: {
+            labels: {
+                style: {
+                    color: Highcharts.getOptions().colors[7]
+                }
+            },
+            title: {
+                text: 'Напряжение (В)',
+                style: {
+                    color: Highcharts.getOptions().colors[7]
+                }
+            },
+            min: data.min_v,
+            max: data.max_v
+        },
+        tooltip: {
+            shared: true,
+            xDateFormat: '%A, %d %B %Y, %H:%M'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            x: 60,
+            verticalAlign: 'top',
+            y: 8,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        series: [{
+            name: 'Напряжение АКБ',
+            type: 'area',
+            yAxis: 0,
+            data: data.battery,
+            color: Highcharts.getOptions().colors[7],
+            tooltip: {
+                valueSuffix: ' v'
+            }
+        }]
+    });
+}
+
+function show_loading() {
+    $('#container1').html('<div class="loading"></div>');
+    $('#container2').html('<div class="loading"></div>');
+    $('#container3').html('<div class="loading"></div>');
+}
+
 $(function () {
     $.getJSON(dir_root + 'statistics?data=true', function (data) {
-        $('#container1').highcharts({
-            title: {
-                text: ''
-            },
-            credits: {
-                enabled: false
-            },
-            xAxis: [{
-                type: 'datetime',
-                dateTimeLabelFormats: {
-                    month: '%e %b, %Y',
-                    year: '%b'
-                },
-                tickInterval: 3600 * 1000 * 2,
-            }],
-            yAxis: [{
-                labels: {
-                    format: '{value}°C',
-                    style: {
-                        color: Highcharts.getOptions().colors[2]
-                    }
-                },
-                title: {
-                    text: 'Температура',
-                    style: {
-                        color: Highcharts.getOptions().colors[2]
-                    }
-                },
-                opposite: false,
+        create_chart(data);
+    });
 
-            }, {
-                gridLineWidth: 0,
-                title: {
-                    text: 'Влажность',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                labels: {
-                    format: '{value} %',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                opposite: true,
-                min: 0,
-                max: 100,
+    $("a[data-role='period']").click(function() {
+        show_loading();
 
-            }],
-            tooltip: {
-                shared: true,
-                xDateFormat: '%A, %d %B %Y, %H:%M'
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                x: 60,
-                verticalAlign: 'top',
-                y: 8,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                name: 'Влажность',
-                type: 'area',
-                yAxis: 1,
-                data: data.humd,
-                tooltip: {
-                    valueSuffix: ' %'
-                }
+        $("a[data-role='period']").removeClass('active');
+        $(this).addClass('active');
 
-            }, {
-                name: 'На улице',
-                type: 'spline',
-                data: data.temp1,
-                color: Highcharts.getOptions().colors[2],
-                tooltip: {
-                    valueSuffix: ' °C'
-                }
-            }, {
-                name: 'В помещении',
-                type: 'spline',
-                data: data.temp2,
-                color: Highcharts.getOptions().colors[5],
-                tooltip: {
-                    valueSuffix: ' °C'
-                }
-            }]
-        });
+        var period = $(this).attr("data-period");
 
-        $('#container2').highcharts({
-            title: {
-                text: ''
-            },
-            credits: {
-                enabled: false
-            },
-            xAxis: [{
-                type: 'datetime',
-                dateTimeLabelFormats: {
-                    month: '%e %b, %Y',
-                    year: '%b'
-                },
-                tickInterval: 3600 * 1000 * 2,
-            }],
-            yAxis: [{
-                labels: {
-                    style: {
-                        color: Highcharts.getOptions().colors[11]
-                    }
-                },
-                title: {
-                    text: 'Освещенность (lux)',
-                    style: {
-                        color: Highcharts.getOptions().colors[11]
-                    }
-                },
-                opposite: false,
-
-            }, {
-                gridLineWidth: 0,
-                title: {
-                    text: 'Скорость ветра (м/с)',
-                    style: {
-                        color: Highcharts.getOptions().colors[9]
-                    }
-                },
-                labels: {
-                    style: {
-                        color: Highcharts.getOptions().colors[9]
-                    }
-                },
-                opposite: true,
-            }, {
-                gridLineWidth: 0,
-                title: {
-                    text: 'Атмосферное давление (мм.рт.ст.)',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                },
-                labels: {
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                },
-                opposite: true,
-            }],
-            tooltip: {
-                shared: true,
-                xDateFormat: '%A, %d %B %Y, %H:%M'
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                x: 60,
-                verticalAlign: 'top',
-                y: 8,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
-            },
-            series: [{
-                name: 'Освещенность',
-                type: 'area',
-                yAxis: 0,
-                data: data.light,
-                color: Highcharts.getOptions().colors[11],
-                tooltip: {
-                    valueSuffix: ' lux'
-                }
-            }, {
-                name: 'Скорость ветра',
-                type: 'column',
-                yAxis: 1,
-                data: data.wind,
-                pointWidth: 1,
-                color: '#7898BF',
-                marker: {
-                    enabled: false
-                },
-                tooltip: {
-                    valueSuffix: ' м/с'
-                }
-
-            }, {
-                name: 'Атмосферное давление',
-                type: 'spline',
-                yAxis: 2,
-                data: data.press,
-                color: Highcharts.getOptions().colors[1],
-                marker: {
-                    enabled: false
-                },
-                tooltip: {
-                    valueSuffix: ' мм.рт.ст.'
-                }
-
-            }]
+        $.getJSON(dir_root + 'statistics?data=true&period=' + period, function (data) {
+            create_chart(data);
         });
     });
 });

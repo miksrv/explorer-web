@@ -9,9 +9,16 @@
             "address": "Orenburg, Chkalov street",
             "country": "Russian Federation"
         },
-        "graphics": "Graphics",
+        "period": {
+            "title": "Period",
+            "day": "Day",
+            "week": "Week",
+            "month": "Month"
+        },
+        "graphics": "Graphs of changes of environmental parameters",
         "charts1": "Temperature and humidity",
         "charts2": "Atmospheric pressure, wind speed and lighting",
+        "charts3": "Voltage Battery weather station",
         "forecast": [
             "Settled fine",
             "Fine weather",

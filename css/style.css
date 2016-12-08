@@ -294,18 +294,15 @@ section:last-of-type {
 }
 #main #background-overlay > .background {
     display: block;
-    background-image: url('images/background/summer-night.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
     height: inherit;
-
     -webkit-filter: blur(2px);
     -moz-filter: blur(2px);
     -o-filter: blur(2px);
     -ms-filter: blur(2px);
     filter: blur(2px);
-
     opacity: .7;
 }
 #main > .wrapper.content > .info {
@@ -338,6 +335,25 @@ section:last-of-type {
 
 #container1, #container2 {
     min-height: 400px;
+}
+#container3 {
+    min-height: 200px;
+}
+
+a[data-role="period"] {
+    display: inline-block;
+    margin: 0 10px;
+}
+a[data-role="period"].active {
+    font-weight: 700;
+}
+
+.loading {
+    background: url(../images/loading.gif);
+    background-position: 50% 40%;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: inherit;
 }
 
 .tile {

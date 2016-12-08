@@ -11,6 +11,8 @@
      * Enable or disable the display of errors and warnings php
      */
     define(DEBUG, FALSE);
+    
+    define(VERSION, '1.3.0 (08.12.2016)');
 
     define(BASEPATH, __DIR__ . '/');
     define(COREPATH, BASEPATH . 'php.inc/');
