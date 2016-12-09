@@ -18,7 +18,7 @@
  * @subpackage Models
  * @category Summary
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.1.0 (20.10.2016)
+ * @version 1.2.0 (09.12.2016)
  */
 class Summary extends \Core\BaseModel {
 
@@ -75,6 +75,75 @@ class Summary extends \Core\BaseModel {
         
         return $name . '.jpg';
     } // function get_background_img()
+
+    
+    /**
+     * Returns index WCT
+     * 
+     * @param float $wct index WCT
+     * @return string
+     */
+    function get_wct_index($wct) {
+        if ($wct > 0) {
+            return 0;
+        } else if ($wct > -10 && $wct <= 0) {
+            return 1;
+        } else if ($wct > -28 && $wct <= 10) {
+            return 2;
+        } else if ($wct > -40 && $wct <= 28) {
+            return 3;
+        } else if ($wct > -48 && $wct <= 40) {
+            return 4;
+        } else if ($wct > -55 && $wct <= 48) {
+            return 5;
+        } else if ($wct < -55) {
+            return 6;
+        }
+    } // function get_wct_index
+
+
+    /**
+     * Returns the color of a string in hexadecimal format on the basis of the index WCT
+     * 
+     * @param integer $index index WCT
+     * @return string
+     */
+    function get_wct_color($index) {
+        $background = array('#C4BCE4', '#A192DD', '#8F7CDD', '#B00A50', '#7A0234', '#3F001A');
+
+        return "background-color: {$background[$index]}";
+    } // function get_wct_color
+
+
+    /**
+     * It calculates the WCT on the basis of outdoor temperature and humidity
+     * 
+     * @return float
+     */
+    function calc_wct() {
+        $wind = 0;
+        $temp = 0;
+        
+        if (isset($this->data['average']) && is_array($this->data['average'])) {
+            foreach ($this->data['average'] as $value) {
+                $temp += $value['temp1'];
+                $wind += $value['wind'];
+            }
+
+            $temp = round($temp / count($this->data['average']), 1);
+            $wind = round($wind / count($this->data['average']), 1);
+        } else {
+            $temp = $this->data['temp1'];
+            $wind = $this->data['wind'];
+        }
+
+        if ($wind == 0)
+            return $temp;
+
+        $speed_kmh = ($wind / 1000) * 3600;
+
+        return round((13.12 + 0.6215 * $temp - 11.37 * pow($speed_kmh, 0.16) + 0.3965 * $temp * pow($speed_kmh, 0.16)), 1);
+    } // function calc_wct()
 
 
     /**

@@ -19,6 +19,15 @@
         "charts1": "Temperature and humidity",
         "charts2": "Atmospheric pressure, wind speed and lighting",
         "charts3": "Voltage Battery weather station",
+        "wct": [
+            "No",
+            "Small",
+            "Low",
+            "Average",
+            "High",
+            "Very high",
+            "Dangerous! Very high"
+        ],
         "forecast": [
             "Settled fine",
             "Fine weather",

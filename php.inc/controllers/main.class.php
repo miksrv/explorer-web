@@ -16,7 +16,7 @@
  * @subpackage Controllers
  * @category Main
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.1.0 (20.10.2016)
+ * @version 1.2.0 (09.12.2016)
  */
 class Main {
 
@@ -116,7 +116,11 @@ class Main {
         $section->background = $section->get_background_img();
         $section->moon_phase = $section->get_moon_phase_name();
 
-        $section->forecast = $section->forecast();
+        $section->forecast  = $section->forecast();
+
+        $section->wct_temp  = $section->calc_wct();
+        $section->wct_index = $section->get_wct_index($section->wct_temp);
+        $section->wct_style = $section->get_wct_color($section->wct_index);
 
         $this->parent->view->assign('summary', $section->get());
     } // protected function load_summary()
@@ -130,7 +134,7 @@ class Main {
         $section->data['sunrise']  = $section->get_sun_rise();
         $section->data['sunset']   = $section->get_sun_set();
 
-        $section->data['dewpoint'] = $section->get_dewpoint();
+        $section->data['dewpoint'] = $section->calc_dewpoint();
         
         $section->data['average'] = $section->get_average_value($this->data['average']);
         $section->data['signs']   = $section->get_values_signs($section->data);

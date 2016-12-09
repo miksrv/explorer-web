@@ -72,6 +72,11 @@
                             </div>
                         </div>
                     </div>
+                    <div>
+                        <a href="https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D1%82%D1%80%D0%BE-%D1%85%D0%BE%D0%BB%D0%BE%D0%B4%D0%BE%D0%B2%D0%BE%D0%B9_%D0%B8%D0%BD%D0%B4%D0%B5%D0%BA%D1%81" target="_blank" rel="nofollow" class="label" style="<?= $summary->wct_style ?>">
+                            WCT: <?= $language->wct[$summary->wct_index] ?> *
+                        </a>
+                    </div>
                     <div class="hint">
                         <?= $language->last_update ?>: 
                         <?php if ($summary->time_update): echo $summary->time_update  ?> (<?= $summary->time_elapsed; ?>)
@@ -127,6 +132,9 @@
                     <div class="collumn">
                         <?php include_once VIEWPATH . 'sections/moonset.inc.php'; ?>
                     </div>
+                </div>
+                <div class="small">
+                    * Ветро-холодовой индекс, опасность для здоровья согласно «индексу охлаждения» (канадская шкала)
                 </div>
             </div>
         </section>

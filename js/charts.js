@@ -405,7 +405,7 @@ function create_chart(data) {
             type: 'column',
             yAxis: 1,
             data: data.wind,
-            pointWidth: 1,
+            pointWidth: $("a[data-period='month']").hasClass('active') ? 15 : 2,
             color: '#7898BF',
             marker: {
                 enabled: false

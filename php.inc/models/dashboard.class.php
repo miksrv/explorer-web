@@ -18,7 +18,7 @@
  * @subpackage Models
  * @category Dashboard
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.1.0 (20.10.2016)
+ * @version 1.2.0 (09.12.2016)
  */
 class Dashboard extends \Core\BaseModel {
 
@@ -111,14 +111,14 @@ class Dashboard extends \Core\BaseModel {
      * 
      * @return float
      */
-    function get_dewpoint() {
+    function calc_dewpoint() {
         if (empty($this->data['temp1']) || empty($this->data['humd']))
             return NULL;
 
         return round(((pow(($this->data['humd']/100), 0.125))*(112+0.9*$this->data['temp1'])+(0.1*$this->data['temp1'])-112),1);
-    } // function get_dewpoint()
-    
-    
+    } // function calc_dewpoint()
+
+
     /**
      * Calculate the average value of the sensor for a given period 
      * (determined by the number of nested arrays)
