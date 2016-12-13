@@ -21,7 +21,7 @@
  * @subpackage Core
  * @category Main
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.0.0 (25.08.2016)
+ * @version 1.0.1 (09.12.2016)
  */
 class Main {
 
@@ -153,7 +153,7 @@ class Main {
          */
         if (isset($_GET['lang']) && in_array($_GET['lang'], $this->available_languages)) {
             $cookies::set_cookie('language', $_GET['lang']);
-            Router::redirect('/');
+            Router::redirect(DIR_ROOT);
         }
 
         $lang_cookie = $cookies::get_cookie('language');

@@ -95,12 +95,12 @@ class Main {
         require_once COREPATH . 'config/arduino.php';
 
         $this->data['arduino'] = $config;
-    }
+    } // protected function load_arduino_config()
 
 
     protected function load_date_helper() {
         include_once COREPATH . 'helpers/date.php';
-    }
+    } // protected function load_date_helper()
 
 
     /**

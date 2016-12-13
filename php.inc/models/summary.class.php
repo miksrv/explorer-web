@@ -18,7 +18,7 @@
  * @subpackage Models
  * @category Summary
  * @author Mikhail (Mik™) <miksoft.tm@gmail.com>
- * @version 1.2.0 (09.12.2016)
+ * @version 1.2.1 (12.12.2016)
  */
 class Summary extends \Core\BaseModel {
 
@@ -109,9 +109,10 @@ class Summary extends \Core\BaseModel {
      * @return string
      */
     function get_wct_color($index) {
-        $background = array('#C4BCE4', '#A192DD', '#8F7CDD', '#B00A50', '#7A0234', '#3F001A');
+        $background = array('#FFF', '#B2A9D5', '#C33CBD', '#CC7118', '#C61C1C', '#3F001A');
+        $font_color = array('#555', '#FFF', '#FFF', '#FFF', '#FFF', '#FFF');
 
-        return "background-color: {$background[$index]}";
+        return "background-color: {$background[$index]}; color: {$background[$font_color]}";
     } // function get_wct_color
 
 
