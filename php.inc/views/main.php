@@ -3,6 +3,13 @@
     <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="<?= $summary->now_temp ?> <?= $language->location->address; ?>" />
+        <meta property="og:description" content="<?= $language->description; ?>" />
+        <meta property="og:url" content="http://miksrv.ru/meteo" />
+        <meta property="og:site_name" content="<?= $language->title; ?>" />
+        <meta property="og:image" content="http://miksrv.ru/meteo/images/background/<?= $summary->background; ?>" />
+        <meta property="og:updated_time" content="<?= date('c', strtotime($summary->time_update)); ?>" />
         <link rel="stylesheet" type="text/css" href="<?= DIR_ROOT ?>css/style.css">
         <link rel="stylesheet" type="text/css" href="<?= DIR_ROOT ?>css/animate.css">
         <link rel="stylesheet" type="text/css" href="<?= DIR_ROOT ?>css/weather-icons.min.css">
